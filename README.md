@@ -5,7 +5,7 @@ Carlyle
 
 A queue batch track fanout service
 
-## Get Carylyl
+## Get Carlyle
 
 ```
 docker pull paradoxical-io/carlyle
@@ -52,19 +52,19 @@ Something maybe like this
 
 ```
 case class BatchItemGroupId(value: UUID) extends UuidValue
- 
+
 object BatchItemId {
   def apply(batchId: BatchId, batchItemGroupId: BatchItemGroupId, index: Long): BatchItemId = BatchItemId(s"${batchId.value}:$batchItemGroupId:$index")
- 
+
   def generate(batchId: BatchId, batchItemGroupId: BatchItemGroupId, numberOfItems: Int): Iterable[BatchItemId] = {
     Stream.from(0, step = 1).take(numberOfItems).map(idx => apply(batchId, batchItemGroupId, idx))
   }
- 
+
   def generate(batchId: BatchId, batchItemGroupId: List[BatchItemGroupInsert]): Iterable[BatchItemId] = {
     batchItemGroupId.toStream.flatMap(group => generate(batchId, group.id, group.upto))
   }
 }
- 
+
 case class BatchItemId(value: String) extends StringValue {
   val (batchId, batchItemGroupId, index) = value.split(':').toList match {
     case batch::hash::index::_ => (BatchId(batch.toLong), BatchItemGroupId(UUID.fromString(hash)), index.toLong)
@@ -72,7 +72,7 @@ case class BatchItemId(value: String) extends StringValue {
   }
 }
 
- 
+
 case class BatchId(value: Long) extends LongValue
 ```
 
@@ -93,4 +93,3 @@ Estimated vs Exact batching
 Estimated batching uses a redis counter keyed off of batch id to decrement a counter. This is consider an estimate becuase it suffers from potential double counting.
 
 Exact batching is described above, and stores a multiplexed bit field for every item in the batch. It is exact, but has more overhead.
- 
