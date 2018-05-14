@@ -26,7 +26,7 @@ Carlyle solves the problem of determistically knowing when a batch of items in a
 - Redis
 - MySQL 5.7+
 
-## How does Caryle work?
+## How does Carlyle work?
 
 Wen working in any resilient distributed system invariably queues come into play. You fire events to be handled into a queue, and you can horizontally scale workers out to churn through events.
 
