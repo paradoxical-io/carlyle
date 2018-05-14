@@ -25,7 +25,7 @@ class MysqlTests extends DbTests with BeforeAndAfterAll {
   "Mysql" should "prevent thread stomping from multiple acks" in withDb { db =>
     val batchId = db.createBatch().waitForResult()
 
-    val max = 10000
+    val max = 1000
 
     val batchItemIds = BatchItemId.generate(batchId, db.insertQueueBatchItems(batchId, max).waitForResult())
 
