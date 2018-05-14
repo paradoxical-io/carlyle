@@ -45,7 +45,9 @@ Back to the problem of storing and transferring N batch item ID’s though. What
 Returning to the client all you need to send back is the hash and how many items are related to that hash. Now deterministic id’s can be created client side that are of the form `batchId:hash:index`. When a client goes back to ack a message (or batch of messages) the ID contains enough information to:
 
 1 .Locate all other hashes related to the batch
+
 2. Get the bitfield for the hash
+
 3. Flip the appropriate bit represented by the index
 
 Something maybe like this
