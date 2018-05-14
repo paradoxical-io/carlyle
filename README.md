@@ -1,6 +1,8 @@
 Carlyle
 ---
 
+[![Build Status](https://travis-ci.org/paradoxical-io/carylyle.svg?branch=master)](https://travis-ci.org/paradoxical-io/carylyle)
+
 A queue batch track fanout service
 
 ## Why Carlyle?
