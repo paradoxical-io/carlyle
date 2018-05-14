@@ -1,12 +1,13 @@
 package io.paradoxical.carlyle.core.api
 
-import com.google.inject.Module
+import com.google.inject.{Key, Module, TypeLiteral}
 import com.twitter.finagle.http.{Request, Response}
 import com.twitter.finatra.http.HttpServer
 import com.twitter.finatra.http.filters.{CommonFilters, LoggingMDCFilter, TraceIdMDCFilter}
 import com.twitter.finatra.http.routing.HttpRouter
 import io.paradoxical.carlyle.core.api.controllers.{EstimatedQueueBatchController, ExactQueueBatchController}
 import io.paradoxical.carlyle.core.api.lifecycle.Startup
+import io.paradoxical.carlyle.core.config.{ReloadableConfig, ServiceConfig}
 import io.paradoxical.finatra.swagger.{ApiDocumentationConfig, SwaggerDocs}
 
 class Server(override val modules: Seq[Module]) extends HttpServer with SwaggerDocs {
@@ -23,8 +24,13 @@ class Server(override val modules: Seq[Module]) extends HttpServer with SwaggerD
     configureDocumentation(router)
 
     router.
-      add[EstimatedQueueBatchController].
-      add[ExactQueueBatchController]
+      add[EstimatedQueueBatchController]
+
+    val config = injector.instance(Key.get(new TypeLiteral[ReloadableConfig[ServiceConfig]](){}))
+
+    if(config.currentValue().cache.isDefined) {
+      router.add[ExactQueueBatchController]
+    }
   }
 
   protected override def postWarmup(): Unit = {

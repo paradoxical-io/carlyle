@@ -1,7 +1,3 @@
-//
-// Copyright (c) 2011-2017 by Curalate, Inc.
-//
-
 package io.paradoxical.carlyle.core.api.controllers
 
 import com.twitter.finagle.http.Status

@@ -13,6 +13,7 @@ object BuildConfig {
     }
     val ficus = "1.4.3"
     val twitterLibraries = "18.2.0"
+    val flyway = "4.1.1"
     val typesafeConfig = "1.3.3"
     val julSlf4j = "1.7.25"
     val janino = "2.7.8"

@@ -10,7 +10,7 @@ case class ServiceConfig(
   max_batch_group_size: Int = 64,
   db: RdbConfigWithConnectionPool,
   cleanup: Cleanup,
-  cache: RedisConfig
+  cache: Option[RedisConfig] = None
 )
 
 case class RedisConfig(
@@ -36,6 +36,6 @@ class StaticConfig[T](data: T) extends ReloadableConfig[T] {
 
 object ConfigLoader extends AllValueReaderInstances {
   def load(): ReloadableConfig[ServiceConfig] = {
-    new StaticConfig(ConfigFactory.load().getConfig("aetr").as[ServiceConfig])
+    new StaticConfig(ConfigFactory.load().getConfig("carlyle").as[ServiceConfig])
   }
 }

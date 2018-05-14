@@ -22,9 +22,7 @@ class EstimatedBatchCountModule extends TwitterModule {
   def cache(
     config: ReloadableConfig[ServiceConfig]
   )(implicit executionContext: ExecutionContext): RedisClientBase = {
-    new RedisClientProvider(
-      config.currentValue().cache
-    ).namespacedClient("carlyle")
+    config.currentValue().cache.map(c => new RedisClientProvider(c).namespacedClient("carlyle")).orNull
   }
 }
 

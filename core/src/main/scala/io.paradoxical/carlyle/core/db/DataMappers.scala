@@ -1,7 +1,3 @@
-//
-// Copyright (c) 2011-2017 by Curalate, Inc.
-//
-
 package io.paradoxical.carlyle.core.db
 
 import io.paradoxical.rdb.slick.dao.SlickDAO

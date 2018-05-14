@@ -1,0 +1,2 @@
+ALTER TABLE batches
+  ADD COLUMN user_key NVARCHAR(255) NULL;
