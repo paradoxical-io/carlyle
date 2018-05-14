@@ -5,6 +5,14 @@ Carlyle
 
 A queue batch track fanout service
 
+## Get Carylyl
+
+```
+docker pull paradoxical-io/carlyle
+```
+
+https://hub.docker.com/r/paradoxical/carlyle/
+
 ## Why Carlyle?
 
 > As late as 1775, the most exhaustive English dictionary yet written contained no word to describe the act of standing in line. In 1837, in a history of the French Revolution, Thomas Carlyle carefully defined the method through which revolutionaries waited their turn, writing that "the Bakers shops have got their Queues, or Tails; their long strings of purchasers, arranged in a tail, so that the first to come be the first served."
