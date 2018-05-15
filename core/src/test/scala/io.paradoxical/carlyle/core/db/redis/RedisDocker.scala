@@ -17,6 +17,7 @@ object Redis {
     val container = DockerCreator.build(
       DockerClientConfig.
         builder.
+        pullAlways(true).
         imageName(s"redis:$version").
         waitForLogLine("The server is now ready to accept connections on port 6379", LogLineMatchFormat.Exact, 5).
         port(DEFAULT_REDIS_PORT).
