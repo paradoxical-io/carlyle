@@ -1,8 +1,8 @@
 package io.paradoxical.carlyle.core.db
 
 import io.paradoxical.carlyle.core.api.modules.BigIntProvider
-import javax.inject.Inject
 import io.paradoxical.common.extensions.Extensions._
+import javax.inject.Inject
 import scala.concurrent.ExecutionContext
 
 class DbInitializer @Inject()(

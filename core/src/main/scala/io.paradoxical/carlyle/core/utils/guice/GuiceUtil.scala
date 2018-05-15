@@ -1,4 +1,4 @@
-package io.paradoxical.carlyle.core.guice
+package io.paradoxical.carlyle.core.utils.guice
 
 import com.google.inject.{AbstractModule, _}
 import com.google.inject.assistedinject.FactoryModuleBuilder

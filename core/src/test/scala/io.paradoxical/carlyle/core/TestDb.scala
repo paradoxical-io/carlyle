@@ -8,7 +8,7 @@ import io.paradoxical.carlyle.core.modules.TestModules._
 import io.paradoxical.common.extensions.Extensions._
 import org.joda.time.DateTime
 import org.scalatest.mockito.MockitoSugar
-import io.paradoxical.carlyle.core.guice.GuiceUtil._
+import io.paradoxical.carlyle.core.utils.guice.GuiceUtil._
 import org.scalatest.{BeforeAndAfterAll, FlatSpec, Matchers}
 
 class TestBase extends FlatSpec with Matchers with BeforeAndAfterAll with MockitoSugar {

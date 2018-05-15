@@ -3,14 +3,19 @@ version: '3.1'
 
 services:
   db:
-    image: mysql
+    image: mysql:5.7
     restart: always
     ports:
-      - 3606:3606
+      - 3306:3306
     environment:
-      POSTGRES_USER: carlyle
-      POSTGRES_PASSWORD: carlyle
-      POSTGRES_DB: carlyle
+      MYSQL_ROOT_PASSWORD: carlyle
+      MYSQL_DATABASE: carlyle
+
+  redis:
+    image: redis:3.2.11-alpine
+    restart: always
+    ports:
+      - 6379:6379
 
   adminer:
     image: adminer

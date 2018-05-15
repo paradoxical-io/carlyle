@@ -2,8 +2,8 @@ package io.paradoxical.carlyle.core.modules
 
 import com.google.inject.Module
 import io.paradoxical.carlyle.core.api.modules.{DbModule, EstimatedBatchCountModule, Modules}
-import io.paradoxical.carlyle.core.guice.GuiceModule
-import io.paradoxical.carlyle.core.guice.GuiceUtil._
+import io.paradoxical.carlyle.core.utils.guice.GuiceModule
+import io.paradoxical.carlyle.core.utils.guice.GuiceUtil._
 import io.paradoxical.carlyle.core.redis.RedisClientBase
 import io.paradoxical.rdb.slick.test.MysqlDocker
 import org.scalatest.mockito.MockitoSugar

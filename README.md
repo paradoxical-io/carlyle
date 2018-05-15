@@ -5,6 +5,10 @@ Carlyle
 
 A queue batch track fanout service
 
+## What is Carlyle?
+
+Carlyle solves the problem of determistically knowing when a batch of items in a queue is completed.  Carlyle makes tracking fan-out events sourced from a single event possible.
+
 ## Get Carlyle
 
 ```
@@ -13,18 +17,63 @@ docker pull paradoxical-io/carlyle
 
 https://hub.docker.com/r/paradoxical/carlyle/
 
+## Requirements
+
+- Redis (optional)
+- MySQL 5.7+
+
+### Run Carlyle
+
+```
+docker run -it -p 8888:8888 -p 9990:9990\
+  --network carlyle_default \
+  paradoxical/carlyle:1.0-SNAPSHOT server
+```
+
+#### Commands
+
+- `server`: Runs the server
+- `migrate-db`: Creates or migrates the backing datastore
+
+#### Env Flags
+
+- `REDIS_URL`
+- `REDIS_PORT` (default 6379)
+- `REDIS_REQUEST_TIMEOUT` (default 10 seconds, format of "X seconds")
+- `DB_JDBC_URL`
+- `DB_USERNAME`
+- `DB_PASSWORD`
+- `DB_MAX_POOL_SIZE` (default 10)
+- `DB_IDLE_TIMEOUT_DURATION` (default 5 seconds, format of "X seconds")
+
+### API Format
+
+For custom clients, it is important to understand that the payload response from adding items to a batch is of the form
+
+```
+{
+   "id": <uuid>,
+   "upto": Long
+}
+```
+
+This one block should be _expanded_ on the client side to be unique id's of the form
+
+```
+batch_id:<uuid of id>:0
+batch_id:<uuid of id>:1
+batch_id:<uuid of id>:2
+batch_id:<uuid of id>:...
+batch_id:<uuid of id>:<upto -1>
+```
+
+I.e. 1 payload response maps to `upto` expanded ids.  Messages should be given one of these unique ID's.
+
+Carlyle is optimized to work in chunks of 64, so it is _best_ to try and maximize the calls to "addItems" in at least 64 items. There's no harm in doing less, it's just extra storage and wire overhead. 
+
 ## Why Carlyle?
 
 > As late as 1775, the most exhaustive English dictionary yet written contained no word to describe the act of standing in line. In 1837, in a history of the French Revolution, Thomas Carlyle carefully defined the method through which revolutionaries waited their turn, writing that "the Bakers shops have got their Queues, or Tails; their long strings of purchasers, arranged in a tail, so that the first to come be the first served."
-
-## What is Carlyle?
-
-Carlyle solves the problem of determistically knowing when a batch of items in a queue is completed.  Carlyle makes tracking fan-out events sourced from a single event possible.
-
-## Requirements
-
-- Redis
-- MySQL 5.7+
 
 ## How does Carlyle work?
 

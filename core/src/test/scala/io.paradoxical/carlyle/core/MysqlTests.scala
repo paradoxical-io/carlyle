@@ -3,16 +3,15 @@ package io.paradoxical.carlyle.core
 import io.paradoxical.carlyle.core.db.{Db, Migrator}
 import io.paradoxical.carlyle.core.model.BatchItemId
 import io.paradoxical.carlyle.core.modules.TestModules
+import io.paradoxical.carlyle.core.modules.TestModules._
+import io.paradoxical.carlyle.core.utils.guice.GuiceUtil._
+import io.paradoxical.common.extensions.Extensions._
 import io.paradoxical.rdb.slick.test.Mysql
-import org.scalatest.{BeforeAndAfterAll, Ignore}
+import org.scalatest.BeforeAndAfterAll
+import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 import scala.util.{Random, Try}
-import io.paradoxical.carlyle.core.guice.GuiceUtil._
-import scala.concurrent.ExecutionContext.Implicits.global
-import io.paradoxical.common.extensions.Extensions._
-import TestModules._
 
-@Ignore
 class MysqlTests extends DbTests with BeforeAndAfterAll {
   lazy val mysql = Mysql.docker("5.7")
 
