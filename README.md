@@ -25,9 +25,22 @@ https://hub.docker.com/r/paradoxical/carlyle/
 ### Run Carlyle
 
 ```
-docker run -it -p 8888:8888 -p 9990:9990\
+# start the dependencies
+> docker-compose up
+
+# create the db
+> docker run -it -p 8888:8888 -p 9990:9990 \
   --network carlyle_default \
-  paradoxical/carlyle:1.0-SNAPSHOT server
+  -e DB_JDBC_URL="jdbc:mysql://db:3306/carlyle?useSSL=false" \
+  -e REDIS_URL="cache" \
+  paradoxical/carlyle migrate-db
+  
+# run the server
+> docker run -it -p 8888:8888 -p 9990:9990 \
+  --network carlyle_default \
+  -e DB_JDBC_URL="jdbc:mysql://db:3306/carlyle?useSSL=false" \
+  -e REDIS_URL="cache" \
+  paradoxical/carlyle server
 ```
 
 #### Commands
