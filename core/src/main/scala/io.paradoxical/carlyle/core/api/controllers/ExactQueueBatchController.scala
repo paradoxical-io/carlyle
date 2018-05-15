@@ -71,8 +71,7 @@ class ExactQueueBatchController @Inject()(db: Db)(implicit executionContext: Exe
       db.ackBatch(req.batchItemIds).flatMap { results =>
         db.getBatchInfo(results.keySet).map(batches => {
           // filter only successful batches
-          batches.filter(x => results.contains(x.batchId.get)).
-            map(b => BatchCompletion(b.batchId.get, b.userKey))
+          batches.filter(x => results(x.batchId.get)).map(b => BatchCompletion(b.batchId.get, b.userKey))
         })
       }.map(AckBatchItemsResponse)
     }
