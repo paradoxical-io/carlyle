@@ -71,6 +71,17 @@ I.e. 1 payload response maps to `upto` expanded ids.  Messages should be given o
 
 Carlyle is optimized to work in chunks of 64, so it is _best_ to try and maximize the calls to "addItems" in at least 64 items. There's no harm in doing less, it's just extra storage and wire overhead. 
 
+### Work flow
+
+Using carlyle is simple.  The general flow is:
+
+1. Open a batch. Optionally supply a user key, this user key will be returned to you when a batch is complete and can help act as a user supplied surrogate key
+
+2. Add items to your batch.  Each time you add to a batch you receive a blob that can be expanded into a set of ID's. This must be done client side to minimize IO costs.  
+
+3. Close your batch.  IF you published your messages before the batch was closed, the producer _must_ check the result of close batch.  If all the messages were ack'd by downstream consumers before the batch was closed, once the batch is closed it will indicate if the batch is complete. In this way the producer needs to be completion aware.  If you didn't publish messages (only aggregated IDs and then closed the batch) then only consumers need to check.  
+
+
 ## Why Carlyle?
 
 > As late as 1775, the most exhaustive English dictionary yet written contained no word to describe the act of standing in line. In 1837, in a history of the French Revolution, Thomas Carlyle carefully defined the method through which revolutionaries waited their turn, writing that "the Bakers shops have got their Queues, or Tails; their long strings of purchasers, arranged in a tail, so that the first to come be the first served."
