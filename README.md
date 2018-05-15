@@ -1,7 +1,7 @@
 Carlyle
 ---
 
-[![Build Status](https://travis-ci.org/paradoxical-io/carylyle.svg?branch=master)](https://travis-ci.org/paradoxical-io/carylyle)
+[![Build Status](https://travis-ci.org/paradoxical-io/carlyle.svg?branch=master)](https://travis-ci.org/paradoxical-io/carlyle)
 
 A queue batch track fanout service
 
