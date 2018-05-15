@@ -8,10 +8,11 @@ import com.twitter.finatra.http.routing.HttpRouter
 import io.paradoxical.carlyle.core.api.controllers.{EstimatedQueueBatchController, ExactQueueBatchController}
 import io.paradoxical.carlyle.core.api.lifecycle.Startup
 import io.paradoxical.carlyle.core.config.{ReloadableConfig, ServiceConfig}
+import io.paradoxical.finatra.serialization.JsonModule
 import io.paradoxical.finatra.swagger.{ApiDocumentationConfig, SwaggerDocs}
 
 class Server(override val modules: Seq[Module]) extends HttpServer with SwaggerDocs {
-
+  override protected def jacksonModule: Module = new JsonModule()
 
   override protected def configureHttp(router: HttpRouter): Unit = {
     router.
@@ -24,12 +25,12 @@ class Server(override val modules: Seq[Module]) extends HttpServer with SwaggerD
     configureDocumentation(router)
 
     router.
-      add[EstimatedQueueBatchController]
+      add[ExactQueueBatchController]
 
     val config = injector.instance(Key.get(new TypeLiteral[ReloadableConfig[ServiceConfig]](){}))
 
     if(config.currentValue().cache.isDefined) {
-      router.add[ExactQueueBatchController]
+      router.add[EstimatedQueueBatchController]
     }
   }
 

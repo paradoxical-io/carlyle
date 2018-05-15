@@ -5,9 +5,9 @@ import java.util.UUID
 
 case class CreateEstimatedBatchResponse(batchId: EstimatedBatchId)
 
-case class CreateEstimatedRequest(batchSize: Long, userKey: Option[String])
+case class CreateEstimatedRequest(userKey: Option[String])
 
-case class GetEstimatedBatchResponse(pending: Long, userKey: Option[String])
+case class GetEstimatedBatchResponse(isComplete: Boolean, isClosed: Boolean, userKey: Option[String])
 
 case class CreateBatchRequest(userKey: Option[String])
 
@@ -31,7 +31,7 @@ case class BatchItemGroupInsert(id: BatchItemGroupId, upto: Int)
 
 case class BatchCompletion(batchId: BatchId, userKey: Option[String])
 
-case class EstimatedBatchCompletion(batchId: EstimatedBatchId, userKey: Option[String], pending: Long)
+case class EstimatedBatchCompletion(batchId: EstimatedBatchId, userKey: Option[String], isComplete: Boolean)
 
 case class EstimatedBatchCompletionAck(batchId: EstimatedBatchId, by: Long = 1)
 

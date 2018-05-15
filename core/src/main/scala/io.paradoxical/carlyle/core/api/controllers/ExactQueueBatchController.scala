@@ -42,7 +42,7 @@ class ExactQueueBatchController @Inject()(db: Db)(implicit executionContext: Exe
       }
     }
 
-    deleteWithDoc("/:batchId") {
+    postWithDoc("/close/:batchId") {
       _.summary("Close a batch").
         tag(tag).
         request[CloseBatchRequest].

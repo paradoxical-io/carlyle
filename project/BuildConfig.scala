@@ -28,7 +28,7 @@ object BuildConfig {
     val mySqlDriverVersion = "5.1.39"
     val h2DriverVersion = "1.4.196"
     val postgres = "42.2.2"
-    val scalajhttp = "2.3.0"
+    val scalajhttp = "2.4.0"
     val okhttp = "3.10.0"
   }
 
