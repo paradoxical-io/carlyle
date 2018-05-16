@@ -2,6 +2,10 @@ Carlyle
 ---
 
 [![Build Status](https://travis-ci.org/paradoxical-io/carlyle.svg?branch=master)](https://travis-ci.org/paradoxical-io/carlyle)
+[![](https://images.microbadger.com/badges/version/paradoxical/carlyle.svg)](https://microbadger.com/images/paradoxical/carlyle "Get your own version badge on microbadger.com")
+[![](https://images.microbadger.com/badges/image/paradoxical/carlyle.svg)](https://microbadger.com/images/paradoxical/carlyle "Get your own image badge on microbadger.com")
+[![Maven Central](https://img.shields.io/maven-central/v/io.paradoxical/carlyle-core_2.12.svg)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22carlyle_core_2.12t%22)
+
 
 A queue batch track fanout service
 
